@@ -4,8 +4,11 @@ package code_directory.java_code.io;
 import java.io.*;
 public class SerializeAndDeserialze {
     public static void main(String test[]){
+        try{
         testableClass tc=new testableClass(1, "tamizhi");
-        
+        }catch(IOException e){
+            
+        }
     }
 }
 
