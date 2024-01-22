@@ -47,29 +47,11 @@ class testableClass implements Serializable{
     private int id ;
     private String name;
     
-    
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    testableClass(int id,String name){
+    public testableClass(int id,String name){
         id=this.id;
         name=this.name;
     }
-    
+
      @Override
     public String toString() {
         return "MyClass{field1=" + id + ", field2='" + name + '\'' + '}';
