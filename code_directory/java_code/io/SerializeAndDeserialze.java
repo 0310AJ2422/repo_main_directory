@@ -44,6 +44,7 @@ public class SerializeAndDeserialze {
 
 class testableClass implements Serializable{
     private static final long SerialVersionUID=1L;
+    private static final long SERIALVERSIONUID2 = SerialVersionUID;
     private int id ;
     private String name;
     
