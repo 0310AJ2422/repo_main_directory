@@ -10,8 +10,10 @@ public class consoleProject{
      
     public static void main(String aj[]){
         while(true){
-            System.out.println("system command ->");
+            System.out.print("system command ->");
             String command=con.readLine();
+            System.out.println();
+            
             switch(command){
 
                 case "add":
@@ -39,8 +41,8 @@ public class consoleProject{
     }
 
     public static void addexpence(){
-        String discription=con.readLine();
-        double amount=Double.parseDouble(con.readLine());
+        String discription=con.readLine("expenses Discription :");
+        double amount=Double.parseDouble(con.readLine(" expesnses amount :"));
 
         map.put(discription,amount);
         System.out.println("Expenses add succesfully");
@@ -52,7 +54,7 @@ public class consoleProject{
         }
         else{
             double total=map.values().stream().mapToDouble(Double::doubleValue).sum();
-            System.out.println("Total expenses"+total);
+            System.out.println("Total expenses : "+total);
         }
     }
 
