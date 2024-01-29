@@ -17,7 +17,12 @@ public class creatnewfile {
             newfile(filename);
             System.out.println("");
             fileinfo(filename);
+            System.out.println("");
+            renaming(filename);
+            System.out.println("");
+            filedelete(filename);
             input.close();
+
 
         }
         catch(Exception e){
@@ -44,8 +49,60 @@ public class creatnewfile {
         }
     
     }
+
+    // this function is renaming for specific file
+    public static void renaming(String path) throws IOException{
+        // new file object creation for previous file name
+        File previousfileobj=new File(path);
+        Scanner input=new Scanner(System.in);
+        // copy the parent directory
+        String renamefile=previousfileobj.getParent();
+        String filename;
+        //get name for rename to file from user  
+        System.out.println("enter the file name :");
+        filename=input.nextLine();
+        //attach parent directory with rename name 
+        renamefile=renamefile.concat("\\"+filename);
+        
+        File renamefileobj=new File(renamefile);
+        //renaming area
+        if(previousfileobj.exists()){
+           
+            //renaming opareation by using renameto method    
+            boolean renamecheck=previousfileobj.renameTo(renamefileobj);
+            if(renamecheck){
+                System.out.println("rename is sucessfully");
+            }else{
+                System.out.println("rename is faild ");
+            }
+        }
+        else{
+            System.out.println("File is not exist ");
+        }
+        input.close();
+    }
+
+    // this function is peerform file delete operation
+    public static void filedelete(String path) throws IOException{
+        // create the file ovject 
+        File deletefileobj=new File(path);
+
+        //check the file is exist or not 
+        if(deletefileobj.exists()){
+            if(deletefileobj.delete()){
+                System.out.println("file is succesfully delete");
+            }else{
+                System.out.println("Failed for file delete");
+            }
+            
+        }
+        else{
+            System.out.println("file is not exist");
+        }
+    }
+
     // get basic information about current file  
-    public static void fileinfo(String path){
+    public static void fileinfo(String path)throws IOException{
         //put file path for object 
         File fileinfoobj =new File(path);
 
