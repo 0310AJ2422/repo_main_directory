@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 
 public class creatnewfile {
+    static Scanner input=new Scanner(System.in);
     public static void main(String args[]){
         try{
             // get input from user which is file or path 
-            Scanner input=new Scanner(System.in);
+            
             System.out.println("Enter the file name ");
             String filename;
             filename=input.nextLine();
@@ -17,6 +18,8 @@ public class creatnewfile {
             newfile(filename);
             System.out.println("");
             fileinfo(filename);
+            System.out.println("");
+            checkfiletpermision(filename);
             System.out.println("");
             renaming(filename);
             System.out.println("");
@@ -63,7 +66,7 @@ public class creatnewfile {
         filename=input.nextLine();
         //attach parent directory with rename name 
         renamefile=renamefile.concat("\\"+filename);
-        
+
         File renamefileobj=new File(renamefile);
         //renaming area
         if(previousfileobj.exists()){
@@ -127,6 +130,88 @@ public class creatnewfile {
             System.out.println(fileinfoobj.getName()+" is Lenth of file "+Length+" Byte");
         }else{
             System.out.println("File is not Exist");
+        }
+    }
+
+    //this meethod is check the file permision like read ,write and execute     
+    public static void checkfiletpermision(String path){
+        //create object for hold file path 
+        File testingobj=new File(path);
+
+        //check file is exist or not
+        if(testingobj.exists()){
+            //the file is exist then procede following function
+            //get user data for select option show all or specific details 
+            String option="";
+
+            //message for  user
+            System.out.println("whic permmision what you want see command(spfic) or all them comand (all) ");
+            System.out.println("are you wish  see specific permision enter the follow comment read,write and execute");
+            
+            //get user data for select option show all or specific details
+            System.out.println("enter the option :");
+            option=input.nextLine();
+
+            //if option is specific then select the if statement
+            if(option.equals("spfic")){
+                //get data from user for select the command
+                String comand="";
+                //do while is repate the action for user wish
+                do{ 
+                    //get data from user for select the command
+                    System.out.println("enter the command->");
+                    comand=input.nextLine();
+
+                    //procede the action based on command by help of switch statement 
+                    switch(comand){
+                        case "read":
+                            if(testingobj.canRead())
+                                System.out.println("The File is readable");
+                            else
+                                System.out.println("The File is not readable");
+                            break;
+                        case "write":
+                            if(testingobj.canWrite())
+                                System.out.println("The File is writable");
+                            else
+                                System.out.println("The File is not writable");
+                            break;
+                        case "execute":
+                            if(testingobj.canExecute())
+                                System.out.println("The File is Executeable");
+                            else
+                                System.out.println("The File is not Executable");
+                            break;
+                        case "exit":
+                            System.out.println("exit...");
+                            break;
+                        default:
+                            System.out.println("in valid command");
+                            break;
+                    }
+                }while(!comand.equals("exit"));
+                
+            //the user wnat see all details this else statement
+            }else{
+                System.out.println("====================all details=====================");
+                if(testingobj.canRead())
+                    System.out.println("The File is readable");
+                else
+                    System.out.println("The File is not readable");
+                if(testingobj.canWrite())
+                    System.out.println("The File is writable");
+                else
+                    System.out.println("The File is not writable");
+                if(testingobj.canExecute())
+                    System.out.println("The File is Executeable");
+                else
+                    System.out.println("The File is not Executable");
+            }
+
+        }
+        // give the message file is not exist to user
+        else{
+            System.out.println("The File is not exist this directory");
         }
     }
 }

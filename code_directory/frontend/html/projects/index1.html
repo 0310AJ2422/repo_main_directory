@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>data retrive page</title>
+    </head>
+    <body>
+        <center>
+        <form id="form">
+            <label>Name:</label><br>
+            <input type="text"  id="name" ><br>
+            <label>Email</label><br>
+            <input type="text"  id="email"><br><br>
+            <input type="button" value="login" id="login"><br>
+        </form>
+        </center>
+        <script>
+            $(document).ready(function(){
+                $("#login").click(function(){
+                    let name=$("#name").val();
+                    let email=$("email").val();
+                    $.post("phpscript.php",{
+                        name:name,
+                        email:email
+                    },function(data){
+                        alert(data);
+                    });
+                    $("#form").trigger("reset");
+                });
+            });
+        </script>
+    </body>
+</html>
