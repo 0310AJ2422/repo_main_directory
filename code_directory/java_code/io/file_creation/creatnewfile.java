@@ -19,7 +19,7 @@ public class creatnewfile {
             System.out.println("");
             fileinfo(filename);
             System.out.println("");
-            checkfiletpermision(filename);
+            checkfilepermision(filename);
             System.out.println("");
             renaming(filename);
             System.out.println("");
@@ -134,7 +134,7 @@ public class creatnewfile {
     }
 
     //this meethod is check the file permision like read ,write and execute     
-    public static void checkfiletpermision(String path){
+    public static void checkfilepermision(String path){
         //create object for hold file path 
         File testingobj=new File(path);
 
@@ -146,7 +146,7 @@ public class creatnewfile {
 
             //message for  user
             System.out.println("whic permmision what you want see command(spfic) or all them comand (all) ");
-            System.out.println("are you wish  see specific permision enter the follow comment read,write and execute");
+            System.out.println("are you wish  see specific permision enter the follow comment read,write,ishide and execute");
             
             //get user data for select option show all or specific details
             System.out.println("enter the option :");
@@ -182,6 +182,12 @@ public class creatnewfile {
                             else
                                 System.out.println("The File is not Executable");
                             break;
+                        case "ishide":
+                            if(testingobj.isHidden())
+                                System.out.println("The File is Hidden");
+                            else
+                                System.out.println("The File is not Hidden");
+                            break;
                         case "exit":
                             System.out.println("exit...");
                             break;
@@ -206,12 +212,75 @@ public class creatnewfile {
                     System.out.println("The File is Executeable");
                 else
                     System.out.println("The File is not Executable");
+                if(testingobj.isHidden())
+                    System.out.println("The File is Hidden ");
+                else
+                    System.out.println("The File is not hidden");
             }
 
         }
         // give the message file is not exist to user
         else{
             System.out.println("The File is not exist this directory");
+        }
+    }
+
+    public static void setfilepremission(String path){
+        File setpermisionobj=new File(path);
+
+        if(setpermisionobj.exists()){
+            System.out.println("which permission you what to set read, write, execute and hidden");
+            System.out.println("command setread ,setwrite,setext and sethide");
+            
+            String commnad="";
+            while(!commnad.equals("exit")){
+            System.out.println("Enter the command-> ");
+            commnad=input.nextLine();
+            switch (commnad) {
+                case "setread":
+                    if(setpermisionobj.setReadable(true)){
+                        System.out.println("The file is set readable");
+                    }else{
+                        System.out.println("The file set readabble is failed");
+                    }
+                    break;
+                case "setwrite":
+                    if(setpermisionobj.setWritable(true)){
+                        System.out.println("The file is set writable");
+                    }else{
+                        System.out.println("The file is set writable is failed");
+                    }
+                    break;
+                case "setext":
+                    if(setpermisionobj.setExecutable(true)){
+                        System.out.println("The file is set executable");
+                    }else{
+                        System.out.println("The file is set executable is failed ");
+                    }
+                    break;
+                case "ishide":
+                        // Check if the file exists
+                        // Specify the prefix or suffix to indicate the file is hidden
+                        String hiddenPrefix = ".";
+            
+                        // Create a new File object with the hidden name
+                        File hiddenFile = new File(setpermisionobj.getParent(), hiddenPrefix + setpermisionobj.getName());
+
+                        // Rename the file to hide it
+                        if (setpermisionobj.renameTo(hiddenFile)) {
+                            System.out.println("File hidden successfully.");
+                        } else {
+                            System.out.println("Failed to hide the file.");
+                        }
+                    
+                    break;
+                default:
+                    System.out.println("invalide command ");
+                    break;
+              }
+            }
+        }else{
+            System.out.println("File is not exist");
         }
     }
 }
